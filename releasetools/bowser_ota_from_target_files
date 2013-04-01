@@ -447,7 +447,9 @@ def WriteFullOTAPackage(input_zip, output_zip):
 
   # Update ubuntu-session from /system/etc/ubuntu-session
   script.Mount("/data")
-  script.UpdateUbuntuSession()
+#  script.UpdateUbuntuSession()
+  script.script.append('package_extract_file("system/etc/ubuntu-session", "/data/ubuntu/usr/bin/ubuntu-session");')
+  script.SetPermissions("/data/ubuntu/usr/bin/ubuntu-session", 0, 0, 0755)
   script.Unmount("/data")
 
   # XXX Cannot check the size because must be very close to limit.
